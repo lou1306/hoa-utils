@@ -207,12 +207,19 @@ class HOATransformer(Transformer):
         actual_nb_accepting_sets = nb_accepting_sets(acceptance_condition)
         accepting_sets_ = accepting_sets(acceptance_condition)
         # this checks whether the number of acc. sets in the acceptance condition is correct.
-        assert_(
-            max(accepting_sets_)
-            == len(accepting_sets_) - 1
-            == expected_nb_accepting_sets - 1
-            == actual_nb_accepting_sets - 1
-        )
+        if expected_nb_accepting_sets > 0:
+            assert_(
+                max(accepting_sets_)
+                ==  len(accepting_sets_) - 1
+                == expected_nb_accepting_sets - 1
+                == actual_nb_accepting_sets - 1,
+            )
+        else:
+            assert_(
+                len(accepting_sets_)
+                == expected_nb_accepting_sets
+                == actual_nb_accepting_sets,
+            )
         return HeaderItemType.ACCEPTANCE, acceptance_condition
 
     def acc_name(self, args):
