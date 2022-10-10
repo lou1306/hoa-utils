@@ -313,10 +313,7 @@ class HOATransformer(Transformer):
 
     def and_label_expr(self, args):
         """Parse the 'and_label_expr' node."""
-        nottrue_args = [a for a in args if type(a) != TrueFormula]
-        if not nottrue_args:
-            return TrueFormula()
-        return reduce(operator.and_, nottrue_args)
+        return reduce(operator.and_, args)
 
     def not_label_expr(self, args):
         """Parse the 'not_label_expr' node."""
