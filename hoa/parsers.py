@@ -228,7 +228,7 @@ class HOATransformer(Transformer):
 
     def tool(self, args):
         """Parse the 'tool' node."""
-        return HeaderItemType.TOOL, args[0]
+        return HeaderItemType.TOOL, args
 
     def name(self, args):
         """Parse the 'nome' node."""
