@@ -210,7 +210,7 @@ class HOATransformer(Transformer):
         if expected_nb_accepting_sets > 0:
             assert_(
                 max(accepting_sets_)
-                ==  len(accepting_sets_) - 1
+                == len(accepting_sets_) - 1
                 == expected_nb_accepting_sets - 1
                 == actual_nb_accepting_sets - 1,
             )
@@ -366,7 +366,7 @@ class HOATransformer(Transformer):
     def boolean_acceptance_cond(self, args):
         """Parse the 'boolean_acceptance_cond' node."""
         boolean = args[0]
-        assert_(type(boolean) == bool)
+        assert_(type(boolean) is bool)
         if boolean:
             return TrueFormula()
         else:
