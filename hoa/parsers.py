@@ -366,7 +366,7 @@ class HOATransformer(Transformer):
     def boolean_acceptance_cond(self, args):
         """Parse the 'boolean_acceptance_cond' node."""
         boolean = args[0]
-        assert_(type(boolean) == bool)
+        assert_(type(boolean) is bool)
         if boolean:
             return TrueFormula()
         else:
