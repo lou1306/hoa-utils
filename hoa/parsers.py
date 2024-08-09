@@ -210,7 +210,7 @@ class HOATransformer(Transformer):
         if expected_nb_accepting_sets > 0:
             assert_(
                 max(accepting_sets_)
-                ==  len(accepting_sets_) - 1
+                == len(accepting_sets_) - 1
                 == expected_nb_accepting_sets - 1
                 == actual_nb_accepting_sets - 1,
             )
