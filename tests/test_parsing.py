@@ -647,7 +647,7 @@ class TestParsingStrixGa:
             nb_states=2,
             start_states={frozenset([0])},
             propositions=(string("a"),),
-            tool=("strix", "21.0.0"),
+            tool=('"strix"', '"21.0.0"'),
             name=string("G a"),
         )
 
