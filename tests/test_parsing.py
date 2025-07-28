@@ -23,7 +23,7 @@ from pathlib import Path
 import pytest
 
 from hoa.ast.acceptance import Fin, Inf, nb_accepting_sets
-from hoa.ast.boolean_expression import TRUE
+from hoa.ast.boolean_expression import TRUE, TrueFormula
 from hoa.ast.label import LabelAlias, LabelAtom
 from hoa.core import Acceptance, Edge, HOA, HOABody, HOAHeader, State
 from hoa.dumpers import dump
@@ -573,6 +573,46 @@ class TestParsingAut11:
         state_edges_dict = OrderedDict({})
         state_edges_dict[State(0, name=string("Fa"))] = [
             Edge([0], label=TRUE, acc_sig=frozenset({0})),
+            Edge([1], label=LabelAtom(0)),
+        ]
+        state_edges_dict[State(1, name=string("true"))] = [Edge([1], label=TRUE)]
+        state_edges_dict[State(2, name=string("G(b&Xc)"))] = [
+            Edge([2, 3], label=LabelAtom(1))
+        ]
+        state_edges_dict[State(3, name=string("c"))] = [Edge([1], label=LabelAtom(2))]
+        hoa_body = HOABody(state_edges_dict)
+
+        hoa_obj = HOA(hoa_header, hoa_body)
+        assert self.hoa_obj == hoa_obj
+
+
+class TestParsingAut12:
+    """Test parsing for tests/examples/aut11."""
+
+    @classmethod
+    def setup_class(cls):
+        """Set the test up."""
+        parser = HOAParser()
+        cls.hoa_obj: HOA = parser(
+            Path(TEST_ROOT_DIR, "examples", "aut12.hoa").read_text()
+        )
+        cls.hoa_header = cls.hoa_obj.header
+        cls.hoa_body = cls.hoa_obj.body
+
+    def test_hoa(self):
+        """Test that the HOA automaton is correct."""
+        hoa_header = HOAHeader(
+            identifier("v1"),
+            Acceptance(TrueFormula(), None),
+            nb_states=4,
+            start_states={frozenset([0, 2]), frozenset([3])},
+            propositions=(string("a"), string("b"), string("c")),
+            name=string("(Fa & G(b&Xc)) | c"),
+        )
+
+        state_edges_dict = OrderedDict({})
+        state_edges_dict[State(0, name=string("Fa"))] = [
+            Edge([0], label=TRUE),
             Edge([1], label=LabelAtom(0)),
         ]
         state_edges_dict[State(1, name=string("true"))] = [Edge([1], label=TRUE)]
