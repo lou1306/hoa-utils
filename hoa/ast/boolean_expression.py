@@ -222,7 +222,7 @@ def _simplify_monotone_op_operands(cls, *operands):
     elif len(operands) == 1:
         return (operands[0],)
     elif cls._absorbing in operands:
-        return cls._absorbing
+        return (cls._absorbing,)
 
     # shift-up subformulas with same operator. DFS on expression tree.
     new_operands = []
