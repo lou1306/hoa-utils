@@ -23,7 +23,7 @@ from pathlib import Path
 import pytest
 
 from hoa.ast.acceptance import Fin, Inf, nb_accepting_sets
-from hoa.ast.boolean_expression import TRUE, TrueFormula
+from hoa.ast.boolean_expression import TRUE, And, TrueFormula
 from hoa.ast.label import LabelAlias, LabelAtom
 from hoa.core import Acceptance, Edge, HOA, HOABody, HOAHeader, State
 from hoa.dumpers import dump
@@ -620,6 +620,44 @@ class TestParsingAut12:
             Edge([2, 3], label=LabelAtom(1))
         ]
         state_edges_dict[State(3, name=string("c"))] = [Edge([1], label=LabelAtom(2))]
+        hoa_body = HOABody(state_edges_dict)
+
+        hoa_obj = HOA(hoa_header, hoa_body)
+        assert self.hoa_obj == hoa_obj
+
+
+class TestParsingStrixGa:
+    """Test parsing for tests/examples/strix-Ga."""
+
+    @classmethod
+    def setup_class(cls):
+        """Set the test up."""
+        parser = HOAParser()
+        cls.hoa_obj: HOA = parser(
+            Path(TEST_ROOT_DIR, "examples", "strix-Ga.hoa").read_text()
+        )
+        cls.hoa_header = cls.hoa_obj.header
+        cls.hoa_body = cls.hoa_obj.body
+
+    def test_hoa(self):
+        """Test that the HOA automaton is correct."""
+        hoa_header = HOAHeader(
+            identifier("v1"),
+            Acceptance(TrueFormula(), "all"),
+            nb_states=2,
+            start_states={frozenset([0])},
+            propositions=(string("a"),),
+            tool=("strix", "21.0.0"),
+            name=string("G a"),
+        )
+
+        state_edges_dict = OrderedDict({})
+        state_edges_dict[State(0, name=string("[0]"))] = [
+            Edge([1], label=And(TrueFormula(), LabelAtom(0))),
+        ]
+        state_edges_dict[State(1, name=string("[1]"))] = [
+            Edge([1], label=And(TrueFormula(), LabelAtom(0))),
+        ]
         hoa_body = HOABody(state_edges_dict)
 
         hoa_obj = HOA(hoa_header, hoa_body)
