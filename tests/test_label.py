@@ -17,7 +17,7 @@
 
 """This module contains the test for the 'hoa.ast.label' module."""
 
-from hoa.ast.boolean_expression import And, Not, Or
+from hoa.ast.boolean_expression import And, FalseFormula, Not, Or, TrueFormula
 from hoa.ast.label import LabelAlias, LabelAtom, propositions
 from hoa.types import alias
 
@@ -38,3 +38,37 @@ def test_propositions():
     assert isinstance(not_, Not)
 
     assert propositions(not_) == {0, 1, 2}
+
+
+def test_constants():
+    """Test the handling of t, f in Boolean operations."""
+    t = TrueFormula()
+    f = FalseFormula()
+
+    neg_t = -t
+    inv_t = ~t
+    neg_f = -f
+    inv_f = ~f
+
+    assert isinstance(neg_t, FalseFormula)
+    assert isinstance(inv_t, FalseFormula)
+    assert isinstance(neg_f, TrueFormula)
+    assert isinstance(inv_f, TrueFormula)
+
+    f_and_t = f & t
+    f_and_f = f & f
+    t_and_f = t & f
+    t_and_t = t & t
+    f_or_f = f | f
+    f_or_t = f | t
+    t_or_f = t | f
+    t_or_t = t | t
+
+    assert isinstance(f_and_f, FalseFormula)
+    assert isinstance(t_and_f, FalseFormula)
+    assert isinstance(f_and_t, FalseFormula)
+    assert isinstance(t_and_t, TrueFormula)
+    assert isinstance(f_or_f, FalseFormula)
+    assert isinstance(f_or_t, TrueFormula)
+    assert isinstance(t_or_f, TrueFormula)
+    assert isinstance(t_or_t, TrueFormula)
