@@ -55,44 +55,6 @@ class UnaryOp(Generic[T]):
         return f"{type(self).__name__}({repr(self.argument)})"
 
 
-@dataclass(order=True, unsafe_hash=True, frozen=True)
-class TrueFormula:
-    """A tautology."""
-
-    def __str__(self) -> str:
-        """Get the string representation."""
-        return "(true)"
-
-    def __repr__(self) -> str:
-        """Get an unambiguous string representation."""
-        return "TrueFormula()"
-
-    def __neg__(self) -> "FalseFormula":
-        """Negate."""
-        return FALSE
-
-
-@dataclass(order=True, unsafe_hash=True, frozen=True)
-class FalseFormula:
-    """A contradiction."""
-
-    def __str__(self) -> str:
-        """Get the string representation."""
-        return "(false)"
-
-    def __repr__(self) -> str:
-        """Get an unambiguous string representation."""
-        return "FalseFormula()"
-
-    def __neg__(self) -> "TrueFormula":
-        """Negate."""
-        return TRUE
-
-
-TRUE = TrueFormula()
-FALSE = FalseFormula()
-
-
 class MonotoneOp(type):
     """Metaclass to simplify monotone operator instantiations."""
 
@@ -110,29 +72,95 @@ class MonotoneOp(type):
 class _And(BinaryOp, Generic[T], metaclass=MonotoneOp):
     """And operator."""
 
-    _absorbing = FALSE
+    _absorbing = None
     SYMBOL = "&"
 
 
 class _Or(BinaryOp, Generic[T], metaclass=MonotoneOp):
     """Or operator."""
 
-    _absorbing = TRUE
+    _absorbing = None
     SYMBOL = "|"
 
 
 class _PositiveAnd(BinaryOp, Generic[T], metaclass=MonotoneOp):
     """And operator."""
 
-    _absorbing = FALSE
+    _absorbing = None
     SYMBOL = "&"
 
 
 class _PositiveOr(BinaryOp, Generic[T], metaclass=MonotoneOp):
     """Or operator."""
 
-    _absorbing = TRUE
+    _absorbing = None
     SYMBOL = "|"
+
+
+@dataclass(order=True, unsafe_hash=True, frozen=True)
+class TrueFormula:
+    """A tautology."""
+
+    def __str__(self) -> str:
+        """Get the string representation."""
+        return "(true)"
+
+    def __repr__(self) -> str:
+        """Get an unambiguous string representation."""
+        return "TrueFormula()"
+
+    def __and__(self, other):
+        """Return self & other."""
+        return _And(self, other)
+
+    def __or__(self, other):
+        """Return self | other."""
+        return _Or(self, other)
+
+    def __neg__(self) -> "FalseFormula":
+        """Negate."""
+        return FALSE
+
+    def __invert__(self) -> "FalseFormula":
+        """Negate."""
+        return FALSE
+
+
+@dataclass(order=True, unsafe_hash=True, frozen=True)
+class FalseFormula:
+    """A contradiction."""
+
+    def __str__(self) -> str:
+        """Get the string representation."""
+        return "(false)"
+
+    def __repr__(self) -> str:
+        """Get an unambiguous string representation."""
+        return "FalseFormula()"
+
+    def __and__(self, other):
+        """Return self & other."""
+        return _And(self, other)
+
+    def __or__(self, other):
+        """Return self | other."""
+        return _Or(self, other)
+
+    def __neg__(self) -> "TrueFormula":
+        """Negate."""
+        return TRUE
+
+    def __invert__(self) -> "TrueFormula":
+        """Negate."""
+        return TRUE
+
+
+TRUE = TrueFormula()
+FALSE = FalseFormula()
+_And._absorbing = FALSE
+_Or._absorbing = TRUE
+_PositiveAnd._absorbing = FALSE
+_PositiveOr._absorbing = TRUE
 
 
 class _Not(UnaryOp, Generic[T]):
