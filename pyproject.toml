@@ -1,12 +1,11 @@
 [tool.poetry]
-name = "hoa_utils"
-version = "0.1.0"
-description = "Utilities for the HOA format."
-authors = ["Marco Favorito <marco.favorito@gmail.com>", "Francesco Fuggitti <francesco.fuggitti@gmail.com>"]
+name = "hoa_utils_redux"
+version = "0.1.1"
+description = "A slightly updated fork of `hoa_utils`. Utilities for the HOA format."
+authors = ["Luca Di Stefano <luca.di.stefano@tuwien.ac.at>"]
 license = "LGPL-3.0-or-later"
 readme = "README.md"
-homepage = "https://whitemech.github.io/hoa-utils"
-repository = "https://github.com/whitemech/hoa-utils.git"
+repository = "https://github.com/lou1306/hoa-utils.git"
 documentation = "https://whitemech.github.io/hoa-utils"
 keywords = [
     "HOA",
@@ -19,7 +18,6 @@ classifiers = [
     'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
     'Natural Language :: English',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
 ]
 packages = [
