@@ -319,6 +319,10 @@ class HOATransformer(Transformer):
         """Parse the 'not_label_expr' node."""
         return ~args[0]
 
+    def base_label_expr(self, args):
+        """Parse the 'base_label_expr' node."""
+        return args[0]
+
     def alias_label_expr(self, args):
         """Parse the 'alias_label_expr' node."""
         if args[0] not in self._aliases:
@@ -380,7 +384,7 @@ class HOAParser:
         """Initialize the HOA parser."""
         directory = Path(os.path.dirname(os.path.realpath(__file__)))
         self._transformer = HOATransformer()
-        self._parser = Lark(open(directory / "grammars" / "hoa.lark"))
+        self._parser = Lark(open(directory / "grammars" / "hoa.lark"), parser="lalr")
 
     def __call__(self, text: str):
         """Try to parse a string."""

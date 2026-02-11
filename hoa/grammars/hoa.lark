@@ -34,17 +34,17 @@ label:  "[" label_expr "]"
 
 
 state_conj : INT ("&" INT)*
-label_expr : "(" label_expr ")"
-           | or_label_expr
-           | and_label_expr
-           | not_label_expr
-           | atom_label_expr
-           | boolean_label_expr
-           | alias_label_expr
+label_expr : or_label_expr
 
-or_label_expr: label_expr "|" label_expr
-and_label_expr: label_expr "&" label_expr
-not_label_expr: "!" label_expr
+or_label_expr: and_label_expr ("|" and_label_expr)*
+and_label_expr: base_label_expr ("&" base_label_expr)*
+base_label_expr : not_label_expr 
+    | alias_label_expr 
+    | atom_label_expr 
+    | boolean_label_expr
+    | "(" label_expr ")"
+
+not_label_expr: "!" base_label_expr
 alias_label_expr: ANAME
 atom_label_expr: INT
 boolean_label_expr: BOOLEAN
@@ -66,7 +66,7 @@ INT: /0|[1-9][0-9]*/                     // A non-negative integer less than 2^3
 COMMENT: /\/\*.*\*\//                    // Comments may be introduced between any token by enclosing them with /* and */ (with proper nesting, i.e. /*a/*b*/c*/ is one comment). C++-style comments are not considered because they require newlines. Tools can use comments to output additional information (e.g. debugging data) that should be discarded upon reading.
 WHITESPACE: /[ \t\n\r]/                  // Except in double-quoted strings and comments, whitespace is used only for tokenization and can be discarded afterwards.
 BOOLEAN: /[tf]/                          // The true and false Boolean constants.
-IDENTIFIER: /[a-zA-Z_][0-9a-zA-Z_-]*/    // An identifier made of letters, digits, - and _. Digits and - may not by used as first character, and t or f are not valid identifiers.
+IDENTIFIER: /(?!(t|f)\b)(?!(Acceptance|Alias|AP|State|Start|acc-name|name|properties|tool)\b)[a-zA-Z_][0-9a-zA-Z_-]*/    // An identifier made of letters, digits, - and _. Digits and - may not by used as first character, and t or f are not valid identifiers.
 ANAME: /@[0-9a-zA-Z_-]+/                 // An alias name, i.e., "@" followed by some alphanumeric characters, - or _. These are used to identify atomic propositions or subformulas.
 HEADERNAME: /[a-zA-Z_][0-9a-zA-Z_-]*:"/  // Header names are similar to identifiers, except that they are immediately followed by a colon (i.e. no comment or space allowed). If an IDENTIFIER or a BOOLEAN is immediately followed by a colon, it should be considered as a HEADERNAME.
 
