@@ -1,65 +1,69 @@
-[tool.poetry]
-name = "hoa_utils"
-version = "0.1.0"
-description = "Utilities for the HOA format."
-authors = ["Marco Favorito <marco.favorito@gmail.com>", "Francesco Fuggitti <francesco.fuggitti@gmail.com>"]
-license = "LGPL-3.0-or-later"
+[project]
+name = "hoa_utils_redux"
+version = "0.2.0"
+description = "A slightly updated fork of `hoa_utils`. Utilities for the HOA format."
+authors = [{ name = "Luca Di Stefano", email = "luca.di.stefano@tuwien.ac.at" }]
+requires-python = ">=3.8,<4.0"
 readme = "README.md"
-homepage = "https://whitemech.github.io/hoa-utils"
-repository = "https://github.com/whitemech/hoa-utils.git"
-documentation = "https://whitemech.github.io/hoa-utils"
+license = "LGPL-3.0-or-later"
 keywords = [
     "HOA",
     "automata",
     "HOA-format",
 ]
 classifiers = [
-    'Development Status :: 2 - Pre-Alpha',
-    'Intended Audience :: Developers',
-    'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
-    'Natural Language :: English',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
 ]
-packages = [
-    { include = "hoa" },
+dependencies = [
+    "click>=8.1.0,<9",
+    "interegular>=0.3.3",
+    "lark>=1.3.1,<2",
 ]
-include = []
 
-[tool.poetry.scripts]
-pyhoafparser = 'hoa.tools.pyhoafparser:main'
+[project.urls]
+Repository = "https://github.com/lou1306/hoa-utils.git"
+Documentation = "https://whitemech.github.io/hoa-utils"
+"Bug Tracker" = "https://github.com/lou1306/hoa-utils/issues"
+"Pull Requests" = "https://github.com/lou1306/hoa-utils/pulls"
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/whitemech/hoa-utils/issues"
-"Pull Requests" = "https://github.com/whitemech/hoa-utils/pulls"
+[project.scripts]
+pyhoafparser = "hoa.tools.pyhoafparser:main"
 
-[tool.poetry.dependencies]
-python = ">=3.8,<4.0"
-click = "^8.1.0"
-lark = "^1.2.2"
+[tool.uv.build-backend]
+module-name = ["hoa"]
+module-root = ""
 
-[tool.poetry.dev-dependencies]
-pytest = "^6.0.1"
-pytest-cov = "^2.10.1"
-pytest-randomly = "^3.4.1"
-tox = "^3.19.0"
-isort = "^5.4.2"
-flake8 = "^5.0.4"
-flake8-docstrings = "^1.5.0"
-flake8-bugbear = "^20.1.4"
-flake8-isort = "^4.0.0"
-pylint = "^2.6.0"
-safety = "^1.9.0"
-vulture = "^2.1"
-bandit = "^1.6.2"
-mkdocs = "^1.1.2"
-markdown_include = "^0.6.0"
-mkdocs-material = "^5.5.11"
-black = "^24.8.0"
-mypy = "^1.11.1"
-flake8-eradicate = "^1.5.0"
+[dependency-groups]
+dev = [
+    "pytest>=6.0.1",
+    "pytest-cov>=2.10.1",
+    "pytest-randomly>=3.4.1",
+    "tox>=3.19.0",
+    "isort>=5.4.2",
+    "flake8>=5.0.4",
+    "flake8-docstrings>=1.5.0",
+    "flake8-bugbear>=20.1.4",
+    "flake8-isort>=4.0.0",
+    "pylint>=2.6.0",
+    "safety>=1.9.0",
+    "vulture>=2.1",
+    "bandit>=1.6.2",
+    "mkdocs>=1.1.2",
+    "markdown_include>=0.6.0",
+    "mkdocs-material>=5.5.11",
+    "black>=24.8.0",
+    "mypy>=1.11.1",
+    "flake8-eradicate>=1.5.0"
+]
 
 [build-system]
-requires = ["poetry >= 0.12, <1"]
-build-backend = "poetry.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["hoa"]

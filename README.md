@@ -1,58 +1,11 @@
-<h1 align="center">
-  <b>HOA utils</b>
-</h1>
+## Disclaimer
 
-<p align="center">
-  <a href="https://pypi.org/project/hoa-utils">
-    <img alt="PyPI" src="https://img.shields.io/pypi/v/hoa-utils">
-  </a>
-  <a href="https://pypi.org/project/hoa-utils">
-    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/hoa-utils" />
-  </a>
-  <a href="">
-    <img alt="PyPI - Status" src="https://img.shields.io/pypi/status/hoa-utils" />
-  </a>
-  <a href="">
-    <img alt="PyPI - Implementation" src="https://img.shields.io/pypi/implementation/hoa-utils" />
-  </a>
-  <a href="">
-    <img alt="PyPI - Wheel" src="https://img.shields.io/pypi/wheel/hoa-utils" />
-  </a>
-  <a href="https://github.com/whitemech/hoa-utils/blob/master/LICENSE">
-    <img alt="GitHub" src="https://img.shields.io/github/license/whitemech/hoa-utils" />
-  </a>
-</p>
-<p align="center">
-  <a href="">
-    <img alt="test" src="https://github.com/whitemech/hoa-utils/workflows/test/badge.svg">
-  </a>
-  <a href="">
-    <img alt="lint" src="https://github.com/whitemech/hoa-utils/workflows/lint/badge.svg">
-  </a>
-  <a href="">
-    <img alt="docs" src="https://github.com/whitemech/hoa-utils/workflows/docs/badge.svg">
-  </a>
-  <a href="https://codecov.io/gh/whitemech/hoa-utils">
-    <img src="https://codecov.io/gh/whitemech/hoa-utils/branch/master/graph/badge.svg" />
-  </a>
-</p>
-<p align="center">
-  <a href="https://img.shields.io/badge/flake8-checked-blueviolet">
-    <img alt="" src="https://img.shields.io/badge/flake8-checked-blueviolet">
-  </a>
-  <a href="https://img.shields.io/badge/mypy-checked-blue">
-    <img alt="" src="https://img.shields.io/badge/mypy-checked-blue">
-  </a>
-  <a href="https://img.shields.io/badge/isort-checked-yellow">
-    <img alt="" src="https://img.shields.io/badge/isort-checked-yellow">
-  </a>
-  <a href="https://img.shields.io/badge/code%20style-black-black">
-    <img alt="black" src="https://img.shields.io/badge/code%20style-black-black" />
-  </a>
-  <a href="https://www.mkdocs.org/">
-    <img alt="" src="https://img.shields.io/badge/docs-mkdocs-9cf">
-  </a>
-</p>
+This repository is a fork of `hoa-utils` (https://github.com/whitemech/hoa-utils).
+I sincerely hope the (limited) changes I suggest are merged upstream. In case this
+happens, I will archive the repository/PyPI package and redirect users towards the
+upstream repo.
+
+## Original README.md
 
 Utilities for the HOA format.
 
