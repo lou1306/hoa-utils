@@ -1,6 +1,6 @@
 [project]
 name = "hoa_utils_redux"
-version = "0.1.1"
+version = "0.2.0"
 description = "A slightly updated fork of `hoa_utils`. Utilities for the HOA format."
 authors = [{ name = "Luca Di Stefano", email = "luca.di.stefano@tuwien.ac.at" }]
 requires-python = ">=3.8,<4.0"
@@ -28,8 +28,8 @@ dependencies = [
 [project.urls]
 Repository = "https://github.com/lou1306/hoa-utils.git"
 Documentation = "https://whitemech.github.io/hoa-utils"
-"Bug Tracker" = "https://github.com/whitemech/hoa-utils/issues"
-"Pull Requests" = "https://github.com/whitemech/hoa-utils/pulls"
+"Bug Tracker" = "https://github.com/lou1306/hoa-utils/issues"
+"Pull Requests" = "https://github.com/lou1306/hoa-utils/pulls"
 
 [project.scripts]
 pyhoafparser = "hoa.tools.pyhoafparser:main"
